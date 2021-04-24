@@ -14,10 +14,14 @@
     <script src="render.js"></script>
     <script src="methods.js"></script>
     <script>
+    var node = null;
     document.getElementById("Search").onclick = function(){
-       var node = new Node(character);
-       var BestChoice =node.Voraz();
-       CharacterMode(BestChoice[0],BestChoice[1])
+        if(node==null)
+            node = new Node(character);
+        BestChoi
+        ce =node.Voraz();
+        console.log(node);
+        CharacterMode(BestChoice[0],BestChoice[1]);
        //console.log("Hello")
     }
     </script>
