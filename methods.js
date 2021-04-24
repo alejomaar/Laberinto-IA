@@ -1,8 +1,8 @@
 class Node{
     constructor(MainCharacter,parent=null){
         this.mainCharacter = MainCharacter;
-        this.parent = null;
-        this.children = [];
+        this.parent = null;   
+        //this.children = [];
         this.openSet = [];
         this.closeSet = [this.mainCharacter.Id()];
         
@@ -57,7 +57,11 @@ class Node{
             acc = (Cost<acc[0])?[Cost,x,y]:acc;
             return acc;
         },[5000,-1,-1]);//,acc, x , y 
-        var BestId = this.mainCharacter.world.PosToId(BestCost[1],BestCost[2])
+        //Select Id of best cost
+        var BestId = this.mainCharacter.world.PosToId(BestCost[1],BestCost[2]);
+        
+        
+        //Add into closeSet and remove of openset
         this.closeSet.push(BestId);
         this.openSet.splice(this.openSet.indexOf(BestId), 1);
 
@@ -69,5 +73,5 @@ class Node{
     }
     CloseSetinPosition(){
         return this.closeSet.map(id=>[id%10, Math.trunc(id/10)]);
-    }//.pop()
+    }
 }

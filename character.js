@@ -13,9 +13,10 @@ class Character{
 }
 
 class MainCharacter extends Character{
-    constructor(Xactive,Yactive,world=null){
+    constructor(Xactive,Yactive,world=null,parent=null){
         super(Xactive,Yactive,world);
         this.world = world;
+        this.parent = parent;
         
     }
     

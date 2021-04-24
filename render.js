@@ -4,8 +4,10 @@ function grid(){
     
     for(var yiter=0;yiter<YAmount;yiter++){
         for(var xiter=0;xiter<XAmount;xiter++){
+            fill(200,200,200);
             square(Xcoordinate, Ycoordinate, SquareSize);
             let id = world.PosToId(xiter,yiter);
+            fill(0,0,0);
             text(id, Xcoordinate, Ycoordinate, SquareSize, SquareSize);
             Xcoordinate= Xcoordinate+SquareSize;
         }
@@ -17,31 +19,31 @@ function grid(){
 
 
 function RenderObstacle(Xpos,Ypos){
-    fill("black");
+    fill(50,50,50);
     square(Xpos, Ypos, SquareSize);
 }
 
 function RenderClean(Xpos,Ypos){
   
-    RenderSquare(Xpos,Ypos,"white");
+    RenderSquare(Xpos,Ypos,[200,200,200]);
 }
 function RenderCharacter(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,"blue");
+    RenderSquare(Xpos,Ypos,[0,0,0]);
 }
 function RenderGoal(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,"red");
+    RenderSquare(Xpos,Ypos,[255,255,255]);
 }
 
 function RenderOpenSet(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,"pink");
+    RenderSquare(Xpos,Ypos,[200,200,0]);
 }
 
 function RenderCloseSet(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,"green");
+    RenderSquare(Xpos,Ypos,[200,0,0]);
 }
 
 function RenderSquare(Xpos,Ypos,color){
-    fill(color);
+    fill(color[0],color[1],color[2]);
     square(Xpos, Ypos, SquareSize);
 
     let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
