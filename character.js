@@ -18,24 +18,34 @@ class MainCharacter extends Character{
         this.world = world;
         
     }
-    getNeighbours(){
+    getChoice(closeSet){
         var LeftSlice = (this.Xactive!=0)?-1:0 //Take left square, if I'm not on the left edge
         var RightSlice = (this.Xactive!=this.world.getWidth()-1)?1:0 //Take right square, if I'm not on the right edge
         var DownSlice = (this.Yactive!=0)?-1:0 //Take down square, if I'm not on the down edge
         var TopSlice = (this.Yactive!=this.world.getHeight()-1)?1:0 //Take down square, if I'm not on the down edge
 
         var XLeft = this.Xactive+LeftSlice;
-        var XRight = this.Xactive+RightSlice+1;//+1 to inclusive interval
+        var XRight = this.Xactive+RightSlice;//+1 to inclusive interval
         var YDown = this.Yactive+DownSlice;
-        var YTop = this.Yactive+TopSlice+1;//+1 to inclusive interval
+        var YTop = this.Yactive+TopSlice;//+1 to inclusive interval
         
-        var WorldRange = this.world.Data.slice(YDown, YTop).map(array=>array.slice(XLeft,XRight));
-        var CostRange = this.world.Cost.slice(YDown, YTop).map(array=>array.slice(XLeft,XRight));
-        //var IndexRange = 
-        return [WorldRange,CostRange];
+        var costMin =1000;
+        var xposmin=null,yposmin=null;
+        for(var y=YDown;y<=YTop;y++)
+        {
+            for(var x=XLeft;x<=XRight;x++)
+            {
+                if(this.world.Data[y][x]==0 && this.world.Cost[y][x]<costMin){
+                    costMin= this.world.Cost[y][x];
+                    yposmin= y;
+                    xposmin=x;
+                }
+            }
+        }
+        return [xposmin,yposmin]       
     }
-    PosToId(x,y){
-        return world.PosToId(x,y);
+    Id(){
+        return world.PosToId(this.Xactive,this.Yactive);
     }
 }
 

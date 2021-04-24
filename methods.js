@@ -1,18 +1,20 @@
-class node{
+class Node{
     constructor(MainCharacter,parent=null){
-        this.mainCharacter = mainCharacter;
+        this.mainCharacter = MainCharacter;
         this.parent = null;
         this.children = [];
-        this.openSet = [];
+        this.openSet = [this.mainCharacter.Id()];
         this.closeSet = [];
         
     }
     Voraz(){
-        var Neighbours = this.mainCharacter.getNeighbours();
-        console.log(this.GetBestChoice(Neighbours));
-        //var 
+        var BestChoice = this.mainCharacter.getChoice();
+        return BestChoice; 
     }
-    GetBestChoice(Neighbours){
+    AddToOpenSet(){
+        
+    }
+    /*GetBestChoice(Neighbours){
         var WorldRange = Neighbours[0];
         var CostRange = Neighbours[1];
         
@@ -26,5 +28,5 @@ class node{
             });
         });
         return {Cost:MinCost, X:Xpos,Y:Ypos};
-    }
+    }*/
 }
