@@ -65,6 +65,18 @@ function GoalMode(XindexSelected,YindexSelected){
     RenderGoal(goal.Xactive*SquareSize,goal.Yactive*SquareSize)
 }
 
+function UpdateOpenSet(OpenSetPosition){
+    OpenSetPosition.forEach(Position => {
+        RenderOpenSet(Position[0]*SquareSize,Position[1]*SquareSize);
+    });
+}
+function UpdateCloseSet(CloseSetPosition){
+    CloseSetPosition.forEach(Position => {
+        RenderCloseSet(Position[0]*SquareSize,Position[1]*SquareSize);
+    });
+}
+
+
 
 
 function keyPressed(){

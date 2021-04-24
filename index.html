@@ -18,11 +18,13 @@
     document.getElementById("Search").onclick = function(){
         if(node==null)
             node = new Node(character);
-        BestChoi
-        ce =node.Voraz();
-        console.log(node);
-        CharacterMode(BestChoice[0],BestChoice[1]);
-       //console.log("Hello")
+        BestChoice =node.Voraz();
+        CharacterMode(BestChoice[0],BestChoice[1]); 
+        UpdateOpenSet(node.OpenSetinPosition());
+        //console.log(node.CloseSetinPosition())
+        UpdateCloseSet(node.CloseSetinPosition().slice(0, -1));
+        
+       
     }
     </script>
     
