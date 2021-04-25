@@ -25,16 +25,16 @@
             <div class="EditMenu">
                 <div class="emptySpace"></div>
                 <div class="option">
-                    <span>Obstaculo</span>
-                    <div class="icon obstacle"></div>
+                    <span>Inicio</span>
+                    <a id="InitMode" class="icon init"></a> 
                 </div>
                 <div class="option">
-                    <span>Inicio</span>
-                    <div class="icon init"></div> 
-                </div>
+                    <span>Obstaculo</span>
+                    <a id="ObstacleMode"class="icon obstacle"></a>
+                </div>               
                 <div class="option">
                     <span>Meta</span>
-                    <div class="icon goal"></div>      
+                    <a id="GoalMode" class="icon goal"></a>      
                 </div>
             </div>
         </div>
@@ -80,6 +80,16 @@
             }//.slice(0, -1)
         }    
     }
+    ModeChange("InitMode","Character")
+    ModeChange("ObstacleMode","Obstacle")
+    ModeChange("GoalMode","Goal")
+    
+    function ModeChange(Id,modeName){
+        document.getElementById(Id).onclick = function(){
+            Mode =modeName;
+        }
+    }
+
     </script>
     
 

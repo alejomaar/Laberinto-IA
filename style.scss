@@ -74,7 +74,7 @@ body,html{
 
 .EditMenu{
     display: flex;
-    width: 30%;
+   // width: 30%;
     align-items: center;
     flex-direction: column;
 
@@ -82,6 +82,7 @@ body,html{
 .icon{
     height: 3rem;
     width: 3rem;
+    cursor: pointer;
     //background-color: blueviolet;
 }
 .obstacle{
@@ -89,6 +90,20 @@ body,html{
 }
 .obstacle:hover{
     background-image: url("sprites/MountainOver.png");
+}
+
+.init{
+    background-image: url("sprites/Character.png");
+}
+.init:hover{
+    background-image: url("sprites/CharacterOver.png");
+}
+
+.goal{
+    background-image: url("sprites/Goal.png");
+}
+.goal:hover{
+    background-image: url("sprites/GoalOver.png");
 }
 
 .option{
