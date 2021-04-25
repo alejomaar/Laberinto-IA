@@ -73,8 +73,23 @@ function UpdateOpenSet(OpenSetPosition){
 function UpdateCloseSet(CloseSetPosition){
     CloseSetPosition.forEach(Position => {
         RenderCloseSet(Position[0]*SquareSize,Position[1]*SquareSize);
+        
     });
 }
+
+function UpdateOpenSetEstrella(OpenSet){
+    OpenSet.forEach(node => {
+        RenderOpenSetEstrella(node.x*SquareSize,node.y*SquareSize,node.cost);
+    });
+}
+function UpdateCloseSetEstrella(CloseSet){
+    CloseSet.forEach(node => {
+        RenderCloseSetEstrella(node.x*SquareSize,node.y*SquareSize,node.cost);
+    });
+}
+
+
+
 function WinRoute(WinRoute){
     WinRoute.forEach(Position => {
         RenderWin(Position[0]*SquareSize,Position[1]*SquareSize);
@@ -86,7 +101,6 @@ function WinRoute(WinRoute){
 
 function keyPressed(){
     SwitchMode(key)
-    console.log(Mode);
 
     function SwitchMode(key){
         switch(key){

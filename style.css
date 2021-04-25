@@ -22,11 +22,14 @@ body, html {
   text-align: center;
   font-weight: 600;
   font-size: 2rem;
-  height: 5rem;
+  min-height: 3rem;
+  max-height: 3rem;
 }
 
 .emptySpace {
-  height: 5rem;
+  height: 3rem;
+  min-height: 3rem;
+  width: 100%;
 }
 
 .InteractionMenu {

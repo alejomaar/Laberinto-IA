@@ -54,7 +54,7 @@
                 node = new Search(character);
             BestChoice =node.Voraz();
             isWin = BestChoice[2];
-            console.log(BestChoice);
+            //console.log(BestChoice);
             //Render In viewport
             character.SetPosition(BestChoice[0],BestChoice[1])
             UpdateOpenSet(node.OpenSetinPosition());
@@ -73,11 +73,11 @@
             console.log(BestChoice);
             character.SetPosition(BestChoice[0],BestChoice[1])
 
-            UpdateOpenSet(node.OpenSetinPosition());
-            UpdateCloseSet(node.CloseSetinPosition().slice(0, -1));
+            UpdateOpenSetEstrella(node.OpenSetinPosition());
+            UpdateCloseSetEstrella(node.CloseSetinPosition());
             if(isWin){
                 WinRoute(node.WinRoute());
-            }
+            }//.slice(0, -1)
         }    
     }
     </script>

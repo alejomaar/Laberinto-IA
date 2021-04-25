@@ -36,7 +36,6 @@ class Search{
                 let isEmptySpace = world.Data[y][x]==0;
                 let currentId = world.PosToId(x,y);
                 let ExistInSet =  this.openSet.concat(this.closeSet).some(node=>node.id==currentId);
-                //console.log(currentId,isEmptySpace,ExistInSet)
                 if(isEmptySpace && !ExistInSet){
                     let NewNodeOpenSet = new Node(currentId,  this.currentNode);
                     this.openSet.push(NewNodeOpenSet);
@@ -143,16 +142,17 @@ class Search2{
                 let ExistInOpenSet =  this.openSet.some(node=>node.id==currentId);
                 let ExistInCloseSet =  this.closeSet.some(node=>node.id==currentId);
                 let NotExistInSet = !ExistInOpenSet && !ExistInCloseSet;
-                //console.log(currentId,isEmptySpace,ExistInSet)
                 if(isEmptySpace && NotExistInSet){
                     let CostInSteps = ((Math.abs(Xactive-x)+Math.abs(Yactive-y))==1)?10:14;
                     let NewNodeOpenSet = new Node2(currentId,  this.currentNode,CostInSteps);
                     this.openSet.push(NewNodeOpenSet);
                 }else if(ExistInOpenSet){
-                    let OldNode = this.openSet.filter(node =>node.id==currentId);
-                    let CostInSteps = ((Math.abs(Xactive-x)+Math.abs(Yactive-y))==1)?10:14;                   
-                    if(this.currentNode.cost+CostInSteps<OldNode.cost)
+                    let OldNode = this.openSet.find(node =>node.id==currentId);
+                    let CostInSteps = ((Math.abs(Xactive-x)+Math.abs(Yactive-y))==1)?10:14;  
+                    if(this.currentNode.costSteps+CostInSteps<OldNode.costSteps){
                         OldNode.parent = this.currentNode;
+                        OldNode.costSteps= this.currentNode.costSteps+CostInSteps;
+                    }
                 }
                 
                 //if(ExistInOpenSet){
@@ -173,7 +173,6 @@ class Search2{
             let y = Math.trunc(id/10); 
             let x = id%10;           
             let Cost= node.costSteps+ 10*CostArray[y][x];
-            console.log("id",id,"Cost",Cost);
             acc = (Cost<acc[0])?[Cost,node]:acc;
             return acc;
         },[5000,null]);//,acc, currentNode
@@ -211,13 +210,26 @@ class Search2{
     costId(id){
         let x = this.idToX(id);
         let y = this.idToY(id);
-        return this.mainCharacter.world.Cost[x][y];
+        return this.mainCharacter.world.Cost[y][x];
     }
     OpenSetinPosition(){
-        return this.openSet.map(node=>[node.id%10, Math.trunc(node.id/10) ])
+        return this.openSet.map(node=>(
+            {
+               x:this.idToX(node.id),
+               y:this.idToY(node.id),
+               cost:node.costSteps+10*this.costId(node.id)
+            }
+        ));
+           
     }
     CloseSetinPosition(){
-        return this.closeSet.map(node=>[node.id%10, Math.trunc(node.id/10)]);
+        return this.closeSet.map(node=>(
+            {
+               x:this.idToX(node.id),
+               y:this.idToY(node.id),
+               cost:node.costSteps+10*this.costId(node.id)
+            }
+        ));
     }
 }
 
