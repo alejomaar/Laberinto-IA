@@ -1,7 +1,7 @@
 function grid(){
     let Xcoordinate=0;
     let Ycoordinate=0;
-    
+    textSize(20)
     for(var yiter=0;yiter<YAmount;yiter++){
         for(var xiter=0;xiter<XAmount;xiter++){
             fill(200,200,200);
@@ -41,6 +41,10 @@ function RenderOpenSet(Xpos,Ypos){
 function RenderCloseSet(Xpos,Ypos){
     RenderSquare(Xpos,Ypos,[200,0,0]);
 }
+function RenderWin(Xpos,Ypos){
+    RenderSquare(Xpos,Ypos,[0,125,0]);
+}
+
 
 function RenderSquare(Xpos,Ypos,color){
     fill(color[0],color[1],color[2]);

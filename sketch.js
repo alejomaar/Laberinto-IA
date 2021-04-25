@@ -1,4 +1,4 @@
-var SquareSize = 50;
+var SquareSize = 80;
 var XAmount =10;
 var YAmount =8;
 var Mode= "Normal";
@@ -10,7 +10,8 @@ function setup(){
     let TotalWidth = SquareSize*XAmount;
     let TotalHeight = SquareSize*YAmount;
       
-    createCanvas(TotalWidth, TotalHeight); 
+    var Canvas = createCanvas(TotalWidth, TotalHeight); 
+    Canvas.parent("canvas");
     background(255,255,0);
     
     grid();
@@ -27,7 +28,6 @@ function mousePressed() {
     let CanvasLimitY = mouseY>0 && mouseY<height;
     let CanvasLimit = CanvasLimitX&&CanvasLimitY;
     if(CanvasLimit){
-        console.log(XindexSelected,YindexSelected)
         if(Mode=="Obstacle")
             ObstacleMode(XindexSelected,YindexSelected)
         if(Mode=="Character")
@@ -73,6 +73,11 @@ function UpdateOpenSet(OpenSetPosition){
 function UpdateCloseSet(CloseSetPosition){
     CloseSetPosition.forEach(Position => {
         RenderCloseSet(Position[0]*SquareSize,Position[1]*SquareSize);
+    });
+}
+function WinRoute(WinRoute){
+    WinRoute.forEach(Position => {
+        RenderWin(Position[0]*SquareSize,Position[1]*SquareSize);
     });
 }
 
