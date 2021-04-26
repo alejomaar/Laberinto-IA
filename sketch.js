@@ -5,15 +5,23 @@ var Mode= "Normal";
 var world = new World(XAmount,YAmount);
 var character = new MainCharacter(null,null,world);
 var goal = new Character(null,null)
+var img ={character:[], grass:null,ground:null,goal:null}
+
+function preload(){
+    for(var i=1;i<=8;i++){
+        img.character.push(loadImage('sprites/Character'+i+'.png')) ;
+    }
+    img.grass = loadImage('sprites/grass.png')
+    img.ground = loadImage('sprites/ground.png')
+    img.goal = loadImage('sprites/meta.png')
+}
 
 function setup(){
     let TotalWidth = SquareSize*XAmount;
-    let TotalHeight = SquareSize*YAmount;
-      
+    let TotalHeight = SquareSize*YAmount;     
     var Canvas = createCanvas(TotalWidth, TotalHeight); 
     Canvas.parent("canvas");
-    background(255,255,0);
-    
+    background(255,255,0);   
     grid();
     //rect(50, 50, 300, 200);
 }

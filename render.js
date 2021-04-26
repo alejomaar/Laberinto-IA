@@ -5,7 +5,7 @@ function grid(){
     for(var yiter=0;yiter<YAmount;yiter++){
         for(var xiter=0;xiter<XAmount;xiter++){
             fill(200,200,200);
-            square(Xcoordinate, Ycoordinate, SquareSize);
+            image(img.ground,Xcoordinate, Ycoordinate,80,80)
             let id = world.PosToId(xiter,yiter);
             fill(0,0,0);
             text(id, Xcoordinate, Ycoordinate, SquareSize, SquareSize);
@@ -19,23 +19,33 @@ function grid(){
 
 
 function RenderObstacle(Xpos,Ypos){
-    fill(50,50,50);
-    square(Xpos, Ypos, SquareSize);
+    //fill(50,50,50);
+    image(img.grass,Xpos,Ypos,80,80)
+    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
+    text(id, Xpos, Ypos, SquareSize, SquareSize);
 }
 
 function RenderClean(Xpos,Ypos){
   
-    RenderSquare(Xpos,Ypos,[200,200,200]);
+    image(img.ground,Xpos, Ypos,80,80)
+    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
+    text(id, Xpos, Ypos, SquareSize, SquareSize);
 }
 function RenderCharacter(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,[0,0,0]);
+    //RenderSquare(Xpos,Ypos,[0,0,0]);
+    image(img.character[0],Xpos,Ypos,80,80);
+    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
+    text(id, Xpos, Ypos, SquareSize, SquareSize);
 }
 function RenderGoal(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,[255,255,255]);
+    image(img.goal,Xpos,Ypos,80,80);
+    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
+    text(id, Xpos, Ypos, SquareSize, SquareSize);
+    //RenderSquare(Xpos,Ypos,[255,255,255]);
 }
 
 function RenderOpenSet(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,[200,200,0]);
+    RenderSquare(Xpos,Ypos,[200,200,0,20]);
 }
 
 function RenderCloseSet(Xpos,Ypos){
@@ -50,7 +60,8 @@ function RenderWin(Xpos,Ypos){
 
 
 function RenderSquare(Xpos,Ypos,color){
-    fill(color[0],color[1],color[2]);
+    image(img.ground,Xpos, Ypos,80,80)
+    fill(color[0],color[1],color[2],125);
     square(Xpos, Ypos, SquareSize);
 
     let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
