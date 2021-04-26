@@ -5,7 +5,7 @@ var Mode= "Normal";
 var world = new World(XAmount,YAmount);
 var character = new MainCharacter(null,null,world);
 var goal = new Character(null,null)
-var img ={character:[], grass:null,ground:null,goal:null}
+var img ={character:[], grass:null,ground:null,goal:null,end:null}
 
 function preload(){
     for(var i=1;i<=8;i++){
@@ -14,6 +14,7 @@ function preload(){
     img.grass = loadImage('sprites/grass.png')
     img.ground = loadImage('sprites/ground.png')
     img.goal = loadImage('sprites/meta.png')
+    img.end = loadImage('sprites/end.png')
 }
 
 function setup(){
@@ -85,7 +86,7 @@ function UpdateCloseSet(CloseSet){
 }
 
 
-function AnimationWin(WinRoute){
+function AnimationWin(WinRoute,EndPosition){
     var iter=0;
     var ImageCharacter=null;
     var idAnimation = setInterval(()=>{
@@ -125,8 +126,10 @@ function AnimationWin(WinRoute){
 
         RenderWin(Position[0]*SquareSize,Position[1]*SquareSize,ImageCharacter);
         iter++;
-        if(iter>=WinRoute.length-1)
+        if(iter>=WinRoute.length-1){
             clearInterval(idAnimation);
+            RenderEnd(EndPosition.x*SquareSize,EndPosition.y*SquareSize);
+        }
     },500);
 
     /*WinRoute.forEach(Position => {

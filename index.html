@@ -70,10 +70,12 @@
         let closeSetData = node.CloseSetinPosition();
         closeSetData.shift();    
         if(isWin){
-            closeSetData.pop();            
+            let EndPosition = closeSetData.pop();            
             UpdateCloseSet(closeSetData); 
             UpdateOpenSet(node.OpenSetinPosition());        
-            AnimationWin(node.WinRoute());
+            AnimationWin(node.WinRoute(),EndPosition);
+            //console.log(EndPosition.x,EndPosition.y)
+            //RenderEnd(EndPosition.x,EndPosition.y);
         }else{
             UpdateCloseSet(closeSetData);
             UpdateOpenSet(node.OpenSetinPosition());

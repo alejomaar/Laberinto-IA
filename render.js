@@ -53,9 +53,12 @@ function RenderWin(Xpos,Ypos,imgCharacter){
     fill(0,125,0,180);
     square(Xpos, Ypos, SquareSize);
     
-    image(imgCharacter,Xpos, Ypos,80,80);
-    
-    
+    image(imgCharacter,Xpos, Ypos,80,80);      
+}
+
+function RenderEnd(Xpos,Ypos){
+    image(img.ground,Xpos, Ypos,80,80);
+    image(img.end,Xpos, Ypos,80,80); 
 }
 
 
