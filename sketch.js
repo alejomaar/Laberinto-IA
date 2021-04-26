@@ -73,35 +73,65 @@ function GoalMode(XindexSelected,YindexSelected){
     RenderGoal(goal.Xactive*SquareSize,goal.Yactive*SquareSize)
 }
 
-function UpdateOpenSet(OpenSetPosition){
-    OpenSetPosition.forEach(Position => {
-        RenderOpenSet(Position[0]*SquareSize,Position[1]*SquareSize);
-    });
-}
-function UpdateCloseSet(CloseSetPosition){
-    CloseSetPosition.forEach(Position => {
-        RenderCloseSet(Position[0]*SquareSize,Position[1]*SquareSize);
-        
-    });
-}
-
-function UpdateOpenSetEstrella(OpenSet){
+function UpdateOpenSet(OpenSet){
     OpenSet.forEach(node => {
-        RenderOpenSetEstrella(node.x*SquareSize,node.y*SquareSize,node.cost);
+        RenderOpenSet(node.x*SquareSize,node.y*SquareSize,node.cost);        
     });
 }
-function UpdateCloseSetEstrella(CloseSet){
+function UpdateCloseSet(CloseSet){
     CloseSet.forEach(node => {
-        RenderCloseSetEstrella(node.x*SquareSize,node.y*SquareSize,node.cost);
+        RenderCloseSet(node.x*SquareSize,node.y*SquareSize,node.cost);        
     });
 }
 
 
+function AnimationWin(WinRoute){
+    var iter=0;
+    var ImageCharacter=null;
+    var idAnimation = setInterval(()=>{
+        Position = WinRoute[iter];
+        PositionNext = WinRoute[iter+1];
+        let XDir = PositionNext[0]-Position[0];
+        let YDir = PositionNext[1]-Position[1];
+        let idDirection = ""+XDir+""+YDir;
 
-function WinRoute(WinRoute){
-    WinRoute.forEach(Position => {
+        switch(idDirection){
+            case "-1-1":
+                ImageCharacter= img.character[5]; 
+                break;
+            case "0-1":
+                ImageCharacter= img.character[6]; 
+                break;
+            case "1-1":
+                ImageCharacter= img.character[7]; 
+                break;
+            case "-10":
+                ImageCharacter= img.character[4]; 
+                break;
+            case "10":
+                ImageCharacter= img.character[0]; 
+                break;
+            case "-11":
+                ImageCharacter= img.character[3]; 
+                break;
+            case "01":
+                ImageCharacter= img.character[2]; 
+                break;
+            case "11":
+                ImageCharacter= img.character[1]; 
+                break;
+
+        }
+
+        RenderWin(Position[0]*SquareSize,Position[1]*SquareSize,ImageCharacter);
+        iter++;
+        if(iter>=WinRoute.length-1)
+            clearInterval(idAnimation);
+    },500);
+
+    /*WinRoute.forEach(Position => {
         RenderWin(Position[0]*SquareSize,Position[1]*SquareSize);
-    });
+    });*/
 }
 
 

@@ -52,34 +52,36 @@
         if(isWin==false){
             if(node==null)
                 node = new Search(character);
-            BestChoice =node.Voraz();
-            isWin = BestChoice[2];
-            //console.log(BestChoice);
-            //Render In viewport
-            character.SetPosition(BestChoice[0],BestChoice[1])
-            UpdateOpenSet(node.OpenSetinPosition());
-            UpdateCloseSet(node.CloseSetinPosition().slice(0, -1));
-            if(isWin){
-                WinRoute(node.WinRoute());
-            }
-        }    
+            Resolver(node.Voraz()); 
+        }       
     }
     document.getElementById("Estrella").onclick = function(){
         if(isWin==false){
             if(node==null)
-                node = new Search2(character);
-            BestChoice =node.Estrella();
-            isWin = BestChoice[2];
-            console.log(BestChoice);
-            character.SetPosition(BestChoice[0],BestChoice[1])
-
-            UpdateOpenSetEstrella(node.OpenSetinPosition());
-            UpdateCloseSetEstrella(node.CloseSetinPosition());
-            if(isWin){
-                WinRoute(node.WinRoute());
-            }//.slice(0, -1)
-        }    
+                node = new Search2(character);  
+            Resolver(node.Estrella());
+        }
     }
+    function Resolver(method){
+        let BestChoice =method;
+        let isWin = BestChoice[2];
+        character.SetPosition(BestChoice[0],BestChoice[1])
+
+        let closeSetData = node.CloseSetinPosition();
+        closeSetData.shift();    
+        if(isWin){
+            closeSetData.pop();            
+            UpdateCloseSet(closeSetData); 
+            UpdateOpenSet(node.OpenSetinPosition());        
+            AnimationWin(node.WinRoute());
+        }else{
+            UpdateCloseSet(closeSetData);
+            UpdateOpenSet(node.OpenSetinPosition());
+        }
+        
+
+    }
+
     ModeChange("InitMode","Character")
     ModeChange("ObstacleMode","Obstacle")
     ModeChange("GoalMode","Goal")

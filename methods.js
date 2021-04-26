@@ -60,6 +60,7 @@ class Search{
         },[5000,null]);//,acc, currentNode
         //Select characteristics of best node 
         var isWin = BestCost[0]==0;
+        //console.log("ISwIN",isWin)
         var BestNode = BestCost[1];
         var BestId = BestNode.id;
         var BestX = BestId%10;
@@ -72,11 +73,44 @@ class Search{
         return [BestX,BestY,isWin];
     }
 
+    idToX(id){
+        return id%10;
+    }
+    idToY(id){
+        return Math.trunc(id/10);
+    }
+    costId(id){
+        let x = this.idToX(id);
+        let y = this.idToY(id);
+        return this.mainCharacter.world.Cost[y][x];
+    }
+
+
     OpenSetinPosition(){
-        return this.openSet.map(node=>[node.id%10, Math.trunc(node.id/10) ])
+        return this.openSet.map(node=>(
+            {
+               x:this.idToX(node.id),
+               y:this.idToY(node.id),
+               cost:{
+                    TotalCost:null,
+                    StepCost:null,
+                    GoalCost: 10*this.costId(node.id)
+                } 
+            }
+        ));
     }
     CloseSetinPosition(){
-        return this.closeSet.map(node=>[node.id%10, Math.trunc(node.id/10)]);
+        return this.closeSet.map(node=>(
+            {
+               x:this.idToX(node.id),
+               y:this.idToY(node.id),
+               cost:{
+                    TotalCost:null,
+                    StepCost:null,
+                    GoalCost: 10*this.costId(node.id)
+                } 
+            }
+        ));
     }
     WinRoute(){
         var idsWin = [];
@@ -217,7 +251,11 @@ class Search2{
             {
                x:this.idToX(node.id),
                y:this.idToY(node.id),
-               cost:node.costSteps+10*this.costId(node.id)
+               cost:{
+                    TotalCost:node.costSteps+10*this.costId(node.id),
+                    StepCost:node.costSteps,
+                    GoalCost: 10*this.costId(node.id)
+                    } 
             }
         ));
            
@@ -225,9 +263,13 @@ class Search2{
     CloseSetinPosition(){
         return this.closeSet.map(node=>(
             {
-               x:this.idToX(node.id),
-               y:this.idToY(node.id),
-               cost:node.costSteps+10*this.costId(node.id)
+                x:this.idToX(node.id),
+                y:this.idToY(node.id),
+                cost:{
+                     TotalCost:node.costSteps+10*this.costId(node.id),
+                     StepCost:node.costSteps,
+                     GoalCost: 10*this.costId(node.id)
+                     } 
             }
         ));
     }

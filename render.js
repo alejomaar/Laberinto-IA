@@ -19,67 +19,72 @@ function grid(){
 
 
 function RenderObstacle(Xpos,Ypos){
-    //fill(50,50,50);
-    image(img.grass,Xpos,Ypos,80,80)
-    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
-    text(id, Xpos, Ypos, SquareSize, SquareSize);
+    RenderItem(img.grass,Xpos,Ypos);
 }
 
 function RenderClean(Xpos,Ypos){
-  
-    image(img.ground,Xpos, Ypos,80,80)
-    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
-    text(id, Xpos, Ypos, SquareSize, SquareSize);
+    RenderItem(img.ground,Xpos,Ypos);
 }
 function RenderCharacter(Xpos,Ypos){
-    //RenderSquare(Xpos,Ypos,[0,0,0]);
-    image(img.character[0],Xpos,Ypos,80,80);
-    let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
-    text(id, Xpos, Ypos, SquareSize, SquareSize);
+    RenderItem(img.character[0],Xpos,Ypos);
 }
 function RenderGoal(Xpos,Ypos){
-    image(img.goal,Xpos,Ypos,80,80);
+    RenderItem(img.goal,Xpos,Ypos);
+}
+
+function RenderItem(img,Xpos,Ypos){
+    image(img,Xpos,Ypos,80,80);
     let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
     text(id, Xpos, Ypos, SquareSize, SquareSize);
-    //RenderSquare(Xpos,Ypos,[255,255,255]);
-}
-
-function RenderOpenSet(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,[200,200,0,20]);
-}
-
-function RenderCloseSet(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,[200,0,0]);
 }
 
 
+function RenderOpenSet(Xpos,Ypos,costArr){
+    RenderSet(Xpos,Ypos,[200,200,0],costArr);
+}
 
-function RenderWin(Xpos,Ypos){
-    RenderSquare(Xpos,Ypos,[0,125,0]);
+function RenderCloseSet(Xpos,Ypos,costArr){
+    RenderSet(Xpos,Ypos,[200,0,0],costArr);
+}
+
+function RenderWin(Xpos,Ypos,imgCharacter){
+
+    image(img.ground,Xpos, Ypos,80,80);
+    fill(0,125,0,180);
+    square(Xpos, Ypos, SquareSize);
+    
+    image(imgCharacter,Xpos, Ypos,80,80);
+    
+    
 }
 
 
-function RenderSquare(Xpos,Ypos,color){
+function RenderSet(Xpos,Ypos,color,costObj){
     image(img.ground,Xpos, Ypos,80,80)
     fill(color[0],color[1],color[2],125);
     square(Xpos, Ypos, SquareSize);
 
     let id = world.PosToId(Xpos/SquareSize,Ypos/SquareSize);
     fill("black");
+    textAlign(LEFT,TOP);
     text(id, Xpos, Ypos, SquareSize, SquareSize);
+    //Cost
+    textAlign(RIGHT,BOTTOM);
+    text(costObj.GoalCost, Xpos, Ypos, SquareSize, SquareSize);
+    if(costObj.TotalCost!=null){
+        //Total Cost
+        textAlign(RIGHT,TOP);
+        text(costObj.TotalCost, Xpos, Ypos, SquareSize, SquareSize);
+        //StepCost
+        textAlign(LEFT,BOTTOM);
+        text(costObj.StepCost, Xpos, Ypos, SquareSize, SquareSize);
+    }
+    //CostStep
+    
 }
 
 
-function RenderOpenSetEstrella(Xpos,Ypos,cost){
-    RenderSquareEstrella(Xpos,Ypos,[200,200,0],cost);
-}
-
-function RenderCloseSetEstrella(Xpos,Ypos,cost){
-    RenderSquareEstrella(Xpos,Ypos,[200,0,0],cost);
-}
-
-
-function RenderSquareEstrella(Xpos,Ypos,color,cost){
+/*function RenderSquareEstrella(Xpos,Ypos,color,cost){
     fill(color[0],color[1],color[2]);
     square(Xpos, Ypos, SquareSize);
 
@@ -90,4 +95,4 @@ function RenderSquareEstrella(Xpos,Ypos,color,cost){
 
     textAlign(RIGHT,BOTTOM)
     text(cost, Xpos, Ypos, SquareSize, SquareSize);
-}
+}*/
