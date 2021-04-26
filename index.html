@@ -49,37 +49,53 @@
     var node = null;
     var isWin= false;
     document.getElementById("Voraz").onclick = function(){
-        if(isWin==false){
-            if(node==null)
-                node = new Search(character);
-            Resolver(node.Voraz()); 
-        }       
+        node = new Search(character)
+        R = setInterval(()=>{
+            Resolver(node.Voraz());
+        },500)
+        // if(isWin==false){
+          //  if(node==null)
+           //     node = new Search(character);
+          // Resolver(node.Voraz()); 
+       // }       
     }
     document.getElementById("Estrella").onclick = function(){
-        if(isWin==false){
-            if(node==null)
-                node = new Search2(character);  
+        node = new Search2(character)
+        R = setInterval(()=>{
             Resolver(node.Estrella());
-        }
+        },500);
+        //if(isWin==false){
+         //   if(node==null)
+          //      node = new Search2(character);  
+         //   Resolver(node.Estrella());
+        //}
     }
     function Resolver(method){
-        let BestChoice =method;
-        let isWin = BestChoice[2];
-        character.SetPosition(BestChoice[0],BestChoice[1])
+        
+            
+            let BestChoice =method;
+            isWin = BestChoice[2];
+            character.SetPosition(BestChoice[0],BestChoice[1])
 
-        let closeSetData = node.CloseSetinPosition();
-        closeSetData.shift();    
-        if(isWin){
-            let EndPosition = closeSetData.pop();            
-            UpdateCloseSet(closeSetData); 
-            UpdateOpenSet(node.OpenSetinPosition());        
-            AnimationWin(node.WinRoute(),EndPosition);
-            //console.log(EndPosition.x,EndPosition.y)
-            //RenderEnd(EndPosition.x,EndPosition.y);
-        }else{
-            UpdateCloseSet(closeSetData);
-            UpdateOpenSet(node.OpenSetinPosition());
-        }
+            let closeSetData = node.CloseSetinPosition();
+            closeSetData.shift();    
+            if(isWin){
+                let EndPosition = closeSetData.pop();            
+                UpdateCloseSet(closeSetData); 
+                UpdateOpenSet(node.OpenSetinPosition());        
+                AnimationWin(node.WinRoute(),EndPosition);
+                clearInterval(R);
+                //console.log(EndPosition.x,EndPosition.y)
+                //RenderEnd(EndPosition.x,EndPosition.y);
+            }else{
+                UpdateCloseSet(closeSetData);
+                UpdateOpenSet(node.OpenSetinPosition());
+            }
+
+
+        
+
+        
         
 
     }
